@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <title>Function tile</title>
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <style>
+        body {
+            background-color: #222;
+            color: #bbb;
+        }
+
+        fieldset {
+            background-color: #222;
+        }
+
+        code {
+            background-color: #222;
+        }
+
+        #textInput {
+            border: none;
+            background-color: #333;
+            color: #bbb;
+            border-radius: 0;
+            font-family: monospace;
+            caret-color: orange;
+        }
+
+        code {
+            padding: 0;
+        }
+
+        code.is-vertical-align {
+            font-size: xx-large;
+        }
+
+        #textInput:focus {
+            outline: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        #frames:focus {
+            outline: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        #frames {
+            border: none;
+            background-color: #333;
+            color: #bbb;
+            border-radius: 0;
+            font-family: monospace;
+            caret-color: orange;
+            width: initial;
+        }
+
+        code pre {
+            padding: 0;
+            margin: 0;
+            background-color: transparent;
+        }
+
+        p.grouped {
+            padding-left: 200px;
+        }
+    </style>
+</head>
+
+<body id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 is-vertical-align">
+                <fieldset>
+                    <legend>Output</legend>
+                    <p>Play speed is affected by complexity + machine performance, convert to gif to see your work at
+                        full speed</p>
+                    <div>
+                        <canvas id="graphOutput" width="256" height="256">
+                            You need to enable canvas.
+                        </canvas>
+                    </div>
+                    <span class="tag is-small button" id="smallerButton"><a href="#"
+                            onclick="change_scale(-1);">➖</a></span>
+                    <span class="tag is-small bg-dark text-light" id="sizeDisplay">256</span>
+                    <span class="tag is-small button" id="biggerButton"><a href="#"
+                            onclick="change_scale(1);">➕</a></span>
+                </fieldset>
+            </div>
+            <div class="col-6">
+                <fieldset>
+                    <legend>Input</legend>
+                    <span class="tag is-small button"><a href="#" onclick="refresh_hint();">Hint?</a></span>
+                    <code id="hintContainer"> x, y = current position</code>
+                    <code><pre>function u(x, y, T) { [r,g,b] = </pre></code>
+                    <code class="is-vertical-align"><textarea autofocus autocomplete="off" class="is-full-width" type="text" rows="5" name="textInput"
+                    id="textInput" oninput="this.value && updateInput(this.value);">[
+    s(x),
+    c(y),
+    t(T)
+]</textarea></code>
+                    <code><pre>return [r,g,b]; }</pre></code>
+                </fieldset>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Gif Recorder</legend>
+            <div class="row is-vertical-align is-center">
+                <div class="col-1">
+                    <span class="tag is-small pull-right button"><a href="#" onclick="gif_it();"
+                            id="gifButton">Record</a></span>
+                </div>
+                <div class="col-3">
+                    <code><a id="downloadIndicatorContainer">◀ To record | To set frames ▶</a></code>
+                </div>
+                <div class="col-2"><label for="frames">Framecount:</label></div>
+                <div class="col-1">
+                    <input name="frames" id="frames" type="number" value="60" min="60" max="300" step="30" maxlength="4"
+                        size="4" onchange="change_framecount(this.value)" />
+                </div>
+
+            </div>
+    </div>
+    </fieldset>
+    <div class="row">
+        <div class="col-6" id="imageContainer"></div>
+    </div>
+    </div>
+</body>
+<script src='gif.js'></script>
+<script src="graph.js"></script>
+
+</html>
